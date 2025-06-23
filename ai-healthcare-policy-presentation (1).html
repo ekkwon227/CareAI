@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>소버린 AI 헬스케어 정책 제안</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        /* 메인 타이틀 섹션 */
+        .hero-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 60px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        h1 {
+            font-size: 3.5em;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .subtitle {
+            font-size: 1.5em;
+            color: #666;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* 섹션 스타일 */
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        h2 {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 30px;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 5px;
+            height: 70%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 3px;
+        }
+        
+        h3 {
+            font-size: 1.8em;
+            color: #444;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+        
+        /* 트리플 임팩트 박스 */
+        .triple-impact {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .impact-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .impact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .impact-card .icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        
+        .impact-card h4 {
+            font-size: 1.3em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        /* 강점 박스 */
+        .strength-box {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .strength-box h3 {
+            color: white;
+            margin-top: 0;
+        }
+        
+        .strength-box ol {
+            list-style: none;
+            counter-reset: strength-counter;
+        }
+        
+        .strength-box li {
+            counter-increment: strength-counter;
+            padding-left: 40px;
+            position: relative;
+            margin-bottom: 15px;
+        }
+        
+        .strength-box li::before {
+            content: counter(strength-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: white;
+            color: #4facfe;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        /* 현황 카드 */
+        .status-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .status-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .status-card .big-stat {
+            font-size: 2.5em;
+            font-weight: 800;
+            color: #667eea;
+            margin: 10px 0;
+        }
+        
+        .status-card p {
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        /* 테이블 스타일 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        /* 기존 서비스 활용 강조 박스 */
+        .emphasis-box {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 단계별 추진 카드 */
+        .phase-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .phase-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .phase-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .phase-number {
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 80px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .phase-card h4 {
+            margin-top: 20px;
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 1.3em;
+        }
+        
+        /* 투자 효과 박스 */
+        .investment-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .investment-box {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .investment-box h4 {
+            color: #667eea;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        
+        .big-number {
+            font-size: 3em;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 10px 0;
+        }
+        
+        /* 즉시 착수 과제 */
+        .task-list {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+        
+        .task-list ol {
+            list-style: none;
+            counter-reset: task-counter;
+        }
+        
+        .task-list li {
+            counter-increment: task-counter;
+            padding: 15px 0 15px 50px;
+            position: relative;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .task-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .task-list li::before {
+            content: counter(task-counter);
+            position: absolute;
+            left: 0;
+            top: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        /* 모바일 반응형 */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 40px 30px;
+            }
+            
+            h1 {
+                font-size: 2.5em;
+            }
+            
+            .section {
+                padding: 30px 20px;
+            }
+            
+            .triple-impact {
+                grid-template-columns: 1fr;
+            }
+            
+            .investment-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            table {
+                font-size: 0.9em;
+            }
+            
+            th, td {
+                padding: 15px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 메인 타이틀 -->
+        <div class="hero-section">
+            <h1>소버린 AI 헬스케어 정책 제안</h1>
+            <p class="subtitle">예방의학·고령자 돌봄·디지털 리터러시 통합 전략</p>
+        </div>
+        
+        <!-- 핵심 정책 본질 섹션 -->
+        <div class="section">
+            <h2>트리플 임팩트 전략의 본질</h2>
+            
+            <div class="triple-impact">
+                <div class="impact-card">
+                    <div class="icon">🏥</div>
+                    <h4>예방의학</h4>
+                    <p>AI 기반 만성질환 예방 및 조기 발견</p>
+                </div>
+                <div class="impact-card">
+                    <div class="icon">💝</div>
+                    <h4>고령자 돌봄</h4>
+                    <p>스마트 돌봄 시스템으로 돌봄 공백 해소</p>
+                </div>
+                <div class="impact-card">
+                    <div class="icon">📱</div>
+                    <h4>디지털 리터러시</h4>
+                    <p>고령자 디지털 활용 능력 향상</p>
+                </div>
+            </div>
+            
+            <div class="emphasis-box">
+                💡 핵심: 새로운 시스템 개발이 아닌, 검증된 민간 앱 서비스를 
+                기존 3대 복지 인프라에 통합하는 현실적 접근
+            </div>
+        </div>
+        
+        <!-- 왜 헬스케어인가 섹션 -->
+        <div class="section">
+            <h2>왜 헬스케어가 소버린 AI 최적 분야인가?</h2>
+            
+            <div class="strength-box">
+                <h3>헬스케어 분야의 독보적 강점</h3>
+                <ol>
+                    <li><strong>데이터 주권:</strong> 전 국민 건강보험 데이터는 한국만의 독점 자산</li>
+                    <li><strong>즉각적 효과:</strong> 의료비 절감으로 투자 회수 가능 (1원 투자 → 5-10원 절감)</li>
+                    <li><strong>글로벌 확장성:</strong> 아시아 고령화 시장 183억 달러 선점 가능</li>
+                    <li><strong>사회적 수용성:</strong> 건강·복지는 정치적 이념을 초월한 국민 공감대</li>
+                    <li><strong>검증된 성공 사례:</strong> 싱가포르 걷기 보상, 국내 캐시워크 2,000만 다운로드</li>
+                </ol>
+            </div>
+            
+            <div class="status-cards">
+                <div class="status-card">
+                    <p>고령자 비율</p>
+                    <div class="big-stat">20%</div>
+                    <p>2025년 기준</p>
+                </div>
+                <div class="status-card">
+                    <p>70세 이상 스마트폰 보급률</p>
+                    <div class="big-stat">73%</div>
+                    <p>세계 최고 수준</p>
+                </div>
+                <div class="status-card">
+                    <p>의료비 GDP 대비</p>
+                    <div class="big-stat">8.2%</div>
+                    <p>매년 급증 중</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 실행 전략 섹션 -->
+        <div class="section">
+            <h2>실행 전략: 기존 3대 복지 서비스 + 검증된 앱 서비스</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>기존 서비스</th>
+                        <th>현재 대상</th>
+                        <th>통합할 검증된 서비스</th>
+                        <th>기대 효과</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>응급안전안심서비스</strong></td>
+                        <td>30만명</td>
+                        <td>
+                            • 캐시워크 등 걷기 앱<br>
+                            • 삼성헬스, 구글핏 연동<br>
+                            • AI 건강 예측 알고리즘
+                        </td>
+                        <td>
+                            • 예방적 건강관리<br>
+                            • 응급상황 사전 감지<br>
+                            • 디지털 기기 친숙도 향상
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>노인맞춤돌봄서비스</strong></td>
+                        <td>50만명</td>
+                        <td>
+                            • 네이버 클로바케어<br>
+                            • 카카오 시니어 서비스<br>
+                            • AI 챗봇 (ChatGPT 등)
+                        </td>
+                        <td>
+                            • 24시간 돌봄 보조<br>
+                            • 사회적 고립 해소<br>
+                            • 디지털 소통 능력 향상
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>건강보험공단 앱</strong></td>
+                        <td>전국민</td>
+                        <td>
+                            • 넛지헬스케어 플랫폼<br>
+                            • 마이데이터 연계<br>
+                            • 지역화폐 연동 시스템
+                        </td>
+                        <td>
+                            • 건강 행동 변화 유도<br>
+                            • 만성질환 예방<br>
+                            • 디지털 금융 활용 증대
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- 단계별 추진 계획 -->
+        <div class="section">
+            <h2>단계별 추진 계획</h2>
+            
+            <div class="phase-cards">
+                <div class="phase-card">
+                    <div class="phase-number">Phase 1</div>
+                    <h4>서비스 발굴·검증 (6개월)</h4>
+                    <ul>
+                        <li>국내외 검증된 헬스케어 앱 발굴</li>
+                        <li>3개 지자체 시범사업 (각 1만명)</li>
+                        <li>기존 복지 인프라와 연동 테스트</li>
+                    </ul>
+                </div>
+                
+                <div class="phase-card">
+                    <div class="phase-number">Phase 2</div>
+                    <h4>전국 확산 (12개월)</h4>
+                    <ul>
+                        <li>17개 시도로 단계적 확대</li>
+                        <li>디지털 리터러시 교육 병행</li>
+                        <li>민간 기업과 수익 공유 모델 구축</li>
+                    </ul>
+                </div>
+                
+                <div class="phase-card">
+                    <div class="phase-number">Phase 3</div>
+                    <h4>플랫폼 고도화 (24개월)</h4>
+                    <ul>
+                        <li>한국형 통합 헬스케어 플랫폼 완성</li>
+                        <li>AI 모델 한국인 특화 최적화</li>
+                        <li>아시아 시장 진출 준비</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 투자 및 효과 -->
+        <div class="section">
+            <h2>투자 및 효과</h2>
+            
+            <div class="investment-grid">
+                <div class="investment-box">
+                    <h4>총 투자 규모</h4>
+                    <div class="big-number">10조원</div>
+                    <p>3년간 투자<br>
+                    (기존 예산 5조 + 추가 5조)</p>
+                </div>
+                
+                <div class="investment-box">
+                    <h4>예상 절감액</h4>
+                    <div class="big-number">연 10조원</div>
+                    <p>응급실 이용 감소: 2조원<br>
+                    만성질환 예방: 5조원<br>
+                    돌봄 효율화: 3조원</p>
+                </div>
+            </div>
+            
+            <h3>추가 사회적 가치</h3>
+            <ul>
+                <li><strong>디지털 격차 해소:</strong> 고령자 디지털 활용률 30% 향상</li>
+                <li><strong>고용 창출:</strong> 디지털 도우미 등 신규 일자리</li>
+                <li><strong>글로벌 경쟁력:</strong> K-헬스케어 브랜드 확립</li>
+            </ul>
+        </div>
+        
+        <!-- 즉시 착수 과제 -->
+        <div class="section">
+            <h2>즉시 착수 과제</h2>
+            
+            <div class="task-list">
+                <ol>
+                    <li><strong>민간 헬스케어 앱 서비스 발굴 TF 구성</strong> (1개월)</li>
+                    <li><strong>기존 3대 서비스 운영 주체와 협의</strong> (2개월)</li>
+                    <li><strong>시범사업 지역 선정 및 참여기업 공모</strong> (3개월)</li>
+                    <li><strong>법적·제도적 기반 마련</strong> (6개월)</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
