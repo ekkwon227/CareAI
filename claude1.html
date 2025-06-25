@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 기반 생활습관의학 및 고령자 돌봄 통합 정책 제안</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.8;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 60px 40px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        h1 {
+            font-size: 3em;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 30px;
+            letter-spacing: -1px;
+        }
+        
+        .subtitle {
+            font-size: 1.3em;
+            color: #5a6c7d;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+        
+        .main-content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 60px 40px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+        
+        .goals-section {
+            margin-bottom: 60px;
+        }
+        
+        .goals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .goal-card {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .goal-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        .goal-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        
+        .goal-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .goal-description {
+            color: #5a6c7d;
+            line-height: 1.6;
+        }
+        
+        .stats-section {
+            margin: 60px 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-size: 3.5em;
+            font-weight: 900;
+            display: block;
+            margin-bottom: 15px;
+        }
+        
+        .stat-label {
+            font-size: 1.1em;
+            font-weight: 500;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+        
+        /* AI 순이 서비스 섹션 스타일 */
+        .sooni-section {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            border-radius: 25px;
+            padding: 50px 40px;
+            margin: 50px 0;
+            box-shadow: 0 25px 50px rgba(255, 154, 158, 0.3);
+            border: 3px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .sooni-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .sooni-title {
+            font-size: 2.5em;
+            font-weight: 800;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .sooni-subtitle {
+            font-size: 1.2em;
+            color: #5a6c7d;
+            font-weight: 500;
+        }
+        
+        .sooni-services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .sooni-service-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 18px;
+            border-left: 6px solid #ff6b6b;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .sooni-service-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .sooni-service-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+        
+        .sooni-service-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .sooni-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .sooni-feature-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 35px;
+            border-radius: 18px;
+            border: 2px solid rgba(255, 107, 107, 0.3);
+        }
+        
+        .sooni-feature-title {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        
+        .sooni-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .sooni-stat-card {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            color: white;
+            padding: 25px 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3);
+        }
+        
+        .sooni-stat-number {
+            font-size: 2em;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .sooni-stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        
+        .service-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 40px 0;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-table th,
+        .service-table td {
+            padding: 25px 20px;
+            text-align: left;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .service-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+        
+        .service-table tr:nth-child(even) {
+            background: rgba(102, 126, 234, 0.03);
+        }
+        
+        .service-table tr:hover {
+            background: rgba(102, 126, 234, 0.08);
+            transition: background 0.3s ease;
+        }
+        
+        .effect-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .effect-card {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(132, 250, 176, 0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .effect-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .effect-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        
+        .effect-title {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .effect-value {
+            font-size: 2.5em;
+            font-weight: 900;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .effect-description {
+            color: #5a6c7d;
+            font-weight: 500;
+        }
+        
+        .investment-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 25px;
+            text-align: center;
+            margin: 50px 0;
+            box-shadow: 0 25px 50px rgba(102, 126, 234, 0.4);
+        }
+        
+        .investment-title {
+            font-size: 2.5em;
+            font-weight: 800;
+            margin-bottom: 30px;
+        }
+        
+        .investment-amount {
+            font-size: 4em;
+            font-weight: 900;
+            margin: 30px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .investment-description {
+            font-size: 1.2em;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        
+        h2 {
+            font-size: 2.5em;
+            font-weight: 800;
+            color: #2c3e50;
+            margin: 50px 0 30px 0;
+            text-align: center;
+        }
+        
+        h3 {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin: 30px 0 20px 0;
+        }
+        
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        li {
+            background: rgba(102, 126, 234, 0.05);
+            margin: 15px 0;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            transition: background 0.3s ease;
+        }
+        
+        li:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+        
+        strong {
+            color: #667eea;
+            font-weight: 700;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .header, .main-content, .sooni-section {
+                padding: 40px 25px;
+            }
+            
+            h1 {
+                font-size: 2.2em;
+            }
+            
+            .goals-grid, .stats-grid, .sooni-services, .effect-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-table {
+                font-size: 0.9em;
+            }
+            
+            .service-table th,
+            .service-table td {
+                padding: 15px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>AI 기반 생활습관의학 및 고령자 돌봄 통합 정책 제안</h1>
+            <div class="subtitle">
+                인공지능 기술을 활용한 예방 중심의 건강관리와<br>
+                고령자를 위한 혁신적 돌봄 서비스 통합 방안
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="goals-section">
+                <h2>핵심 목표</h2>
+                <div class="goals-grid">
+                    <div class="goal-card">
+                        <div class="goal-icon">🔬</div>
+                        <div class="goal-title">AI 기반 만성질환 예방 및 조기 발견</div>
+                        <div class="goal-description">
+                            생활습관의학과 AI 기술을 결합하여 개인 맞춤형 건강관리 서비스를 제공하고, 
+                            만성질환의 발생을 사전에 예방하며 조기 진단을 통한 효과적 관리 체계를 구축합니다.
+                        </div>
+                    </div>
+                    <div class="goal-card">
+                        <div class="goal-icon">🤝</div>
+                        <div class="goal-title">AI 기술로 돌봄 공백 해소</div>
+                        <div class="goal-description">
+                            고령화 사회의 돌봄 인력 부족 문제를 AI 기반 스마트 돌봄 시스템으로 해결하고, 
+                            24시간 지속적인 케어 서비스를 통해 안전하고 품질 높은 돌봄을 실현합니다.
+                        </div>
+                    </div>
+                    <div class="goal-card">
+                        <div class="goal-icon">📱</div>
+                        <div class="goal-title">부차적 효과: 고령자 디지털 리터러시 증진</div>
+                        <div class="goal-description">
+                            AI 서비스 이용 과정에서 자연스럽게 디지털 기기 활용 능력을 향상시키고, 
+                            디지털 포용성을 강화하여 모든 연령층이 기술 혜택을 누릴 수 있도록 지원합니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-section">
+                <h2>현황 분석</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-number">20.6%</span>
+                        <div class="stat-label">2025년 고령자 비율<br>초고령사회 진입</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">68.2%</span>
+                        <div class="stat-label">70세 이상 스마트폰 보급률<br>지속적 증가 추세</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">9.1%</span>
+                        <div class="stat-label">의료비 GDP 대비<br>OECD 평균 초과</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI 순이 서비스 섹션 -->
+            <div class="sooni-section">
+                <div class="sooni-header">
+                    <div class="sooni-title">🤖 AI 순이 서비스</div>
+                    <div class="sooni-subtitle">
+                        검증된 AI 기반 건강 생활습관 관리 및 돌봄 혁신 솔루션
+                    </div>
+                </div>
+
+                <div class="sooni-services">
+                    <div class="sooni-service-card">
+                        <div class="sooni-service-icon">🩺</div>
+                        <div class="sooni-service-title">AI 주치의 서비스</div>
+                        <div>행동 데이터와 외부 데이터를 기반으로 LLM 기반 AI 주치의가 Daily 건강 생활습관 점수 리포트와 실시간 상담을 제공</div>
+                    </div>
+                    <div class="sooni-service-card">
+                        <div class="sooni-service-icon">🔊</div>
+                        <div class="sooni-service-title">음성 발화 서비스</div>
+                        <div>사용자의 행동 데이터 기반으로 재활 중재용 음성 메시지를 특정 시점에 자동으로 발화하여 수용도를 높임</div>
+                    </div>
+                    <div class="sooni-service-card">
+                        <div class="sooni-service-icon">📱</div>
+                        <div class="sooni-service-title">PUSH 케어콜 서비스</div>
+                        <div>행동 패턴 변화 감지 시 Nudge형 메시지 자동 발화를 통해 생활습관 변화를 유도</div>
+                    </div>
+                    <div class="sooni-service-card">
+                        <div class="sooni-service-icon">🎭</div>
+                        <div class="sooni-service-title">AI 가상 문화센터</div>
+                        <div>전문가가 만든 재활 중재 콘텐츠를 AI가 매일, 정기적으로 자동 진행하는 앱 방송 형태로 24/7 제공</div>
+                    </div>
+                </div>
+
+                <div class="sooni-features-grid">
+                    <div class="sooni-feature-card">
+                        <div class="sooni-feature-title">🎯 핵심 해결 과제</div>
+                        <ul>
+                            <li><strong>생활습관 관리의 중요성:</strong> 질병의 가장 큰 원인이자 효과적인 예방 수단임에도 불구하고 기존 서비스는 일방향적</li>
+                            <li><strong>라이프로그 데이터 부재:</strong> 체계적이고 누적된 시계열 일상 라이프로그 데이터 부족</li>
+                            <li><strong>돌봄 인력 부족:</strong> 1인 가구 증가 및 초고령화로 개인 건강을 지속 관리할 인력 부족</li>
+                        </ul>
+                    </div>
+                    <div class="sooni-feature-card">
+                        <div class="sooni-feature-title">🔬 의학적 검증 근거</div>
+                        <ul>
+                            <li><strong>WHO:</strong> 전 세계 주요 사망 원인의 80% 이상이 생활습관 개선으로 예방 가능</li>
+                            <li><strong>연세의료원:</strong> 생활습관 개선, 낙상효능, 우울증, 삶의 질에서 유의미한 성과 (SCI급 논문 발표)</li>
+                            <li><strong>AI 기반 개입 연구:</strong> AI 개인화 중재 메시지는 일반 텍스트 대비 실행률 2.4배, 유지율 1.8배 증가</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 style="text-align: center; color: #2c3e50; margin: 30px 0 20px 0;">📊 검증된 정확도 및 실증 데이터</h3>
+                <div class="sooni-stats">
+                    <div class="sooni-stat-card">
+                        <span class="sooni-stat-number">7,000명+</span>
+                        <div class="sooni-stat-label">6년간 실증 데이터</div>
+                    </div>
+                    <div class="sooni-stat-card">
+                        <span class="sooni-stat-number">91.2%</span>
+                        <div class="sooni-stat-label">기상·취침 감지</div>
+                    </div>
+                    <div class="sooni-stat-card">
+                        <span class="sooni-stat-number">93.5%</span>
+                        <div class="sooni-stat-label">외출·귀가 인식</div>
+                    </div>
+                    <div class="sooni-stat-card">
+                        <span class="sooni-stat-number">89.7%</span>
+                        <div class="sooni-stat-label">복약 여부 인식</div>
+                    </div>
+                    <div class="sooni-stat-card">
+                        <span class="sooni-stat-number">95%+</span>
+                        <div class="sooni-stat-label">걸음수/이동거리</div>
+                    </div>
+                </div>
+
+                <div style="background: rgba(255, 255, 255, 0.9); padding: 30px; border-radius: 15px; margin-top: 30px;">
+                    <h3 style="color: #2c3e50; margin-bottom: 20px;">🚀 기술적 차별점</h3>
+                    <ul>
+                        <li><strong>전자동 데이터 수집:</strong> 사용자 입력 없이 스마트폰 센서와 자체 스티커형 센서를 통해 라이프로그 데이터 자동 수집</li>
+                        <li><strong>행동기억 AI 모델:</strong> 정제된 데이터 기반 행동 시나리오 분석 알고리즘으로 이상 행동 감지 시 진단, 중재 메시지, 콘텐츠 연결까지 자동 실행</li>
+                        <li><strong>Context-Aware 중재:</strong> 시간, 장소, 과거 이력 등 다차원 맥락정보를 인식하여 중재의 시점, 형식, 어투, 빈도 등을 최적화</li>
+                        <li><strong>능동형 AI 솔루션:</strong> 앱을 사용하지 않는 상황에서도 개입 가능한 스마트폰 탑재 AI</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2>통합 서비스 계획</h2>
+            <table class="service-table">
+                <thead>
+                    <tr>
+                        <th>기존 서비스</th>
+                        <th>현재 대상</th>
+                        <th>통합할 검증된 서비스</th>
+                        <th>기대 효과</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>응급안전안심서비스</strong></td>
+                        <td>30만명</td>
+                        <td>
+                            • 캐시워크 등 걷기 앱<br>
+                            • 삼성헬스, 구글핏 연동<br>
+                            • AI 건강 예측 알고리즘<br>
+                            • <strong>AI 순이 주치의·음성발화 서비스</strong>
+                        </td>
+                        <td>
+                            • 예방적 건강관리<br>
+                            • 응급상황 사전 감지<br>
+                            • 디지털 기기 친숙도 향상
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>노인맞춤돌봄서비스</strong></td>
+                        <td>50만명</td>
+                        <td>
+                            • 네이버 클로바케어<br>
+                            • 카카오 시니어 서비스<br>
+                            • AI 챗봇 (ChatGPT 등)<br>
+                            • <strong>AI 순이 가상 문화센터·케어콜</strong>
+                        </td>
+                        <td>
+                            • 24시간 돌봄 보조<br>
+                            • 사회적 고립 해소<br>
+                            • 디지털 소통 능력 향상
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>건강보험공단 앱</strong></td>
+                        <td>전국민</td>
+                        <td>
+                            • 넛지헬스케어 플랫폼<br>
+                            • 마이데이터 연계<br>
+                            • 지역화폐 연동 시스템<br>
+                            • <strong>AI 순이 통합 플랫폼</strong>
+                        </td>
+                        <td>
+                            • 건강 행동 변화 유도<br>
+                            • 만성질환 예방<br>
+                            • 디지털 금융 활용 증대
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>기대 효과</h2>
+            <div class="effect-grid">
+                <div class="effect-card">
+                    <div class="effect-icon">🏥</div>
+                    <div class="effect-title">65세 이상 부적절한 응급실 이용 감소</div>
+                    <div class="effect-value">20%</div>
+                    <div class="effect-description">1차 의료기관 이용 활성화</div>
+                </div>
+                <div class="effect-card">
+                    <div class="effect-icon">💊</div>
+                    <div class="effect-title">생활습관의학 기반 예방으로</div>
+                    <div class="effect-value">30%</div>
+                    <div class="effect-description">만성질환 발생률 감소</div>
+                </div>
+                <div class="effect-card">
+                    <div class="effect-icon">🤖</div>
+                    <div class="effect-title">AI 맞춤형 돌봄으로</div>
+                    <div class="effect-value">80%</div>
+                    <div class="effect-description">서비스 효율성 향상</div>
+                </div>
+                <div class="effect-card">
+                    <div class="effect-icon">📱</div>
+                    <div
