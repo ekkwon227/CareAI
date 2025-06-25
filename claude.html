@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 기반 생활습관의학 및 고령자 돌봄 통합 정책 제안</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header h2 {
+            font-size: 1.2rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        section {
+            background: rgba(255, 255, 255, 0.95);
+            margin-bottom: 2rem;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        h2 {
+            color: #2c5aa0;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid #2c5aa0;
+            padding-bottom: 0.5rem;
+        }
+
+        .goals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .goal-card {
+            background: linear-gradient(135deg, #e8f4f8 0%, #d1ecf1 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            border-left: 5px solid #2c5aa0;
+        }
+
+        .goal-card.secondary {
+            background: linear-gradient(135deg, #e8f4f8 0%, #d1ecf1 100%);
+            border-left: 4px solid #6ba3d0;
+        }
+
+        .goal-card.secondary h3 {
+            color: #5a8db8;
+        }
+
+        .goal-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .goal-card h3 {
+            color: #2c5aa0;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #fff9c4 0%, #ffeb3b 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            border-left: 5px solid #f57c00;
+        }
+
+        .stat-card h3 {
+            font-size: 2rem;
+            color: #e65100;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card p {
+            color: #bf360c;
+            font-weight: 500;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background: linear-gradient(135deg, #2c5aa0 0%, #3f51b5 100%);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .investment-section, .effect-section, .kpi-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .investment-breakdown {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .investment-category {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #2c5aa0;
+        }
+
+        .investment-category h4 {
+            color: #2c5aa0;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .investment-category ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .investment-category li {
+            margin-bottom: 0.8rem;
+            padding: 0.5rem;
+            background: white;
+            border-radius: 5px;
+            border-left: 3px solid #4CAF50;
+        }
+
+        .effect-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .effect-card {
+            background: linear-gradient(135deg, #e8f5e8 0%, #d4ebb4 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            border-left: 4px solid #4CAF50;
+        }
+
+        .effect-card h4 {
+            color: #2e7d32;
+            margin-bottom: 0.5rem;
+        }
+
+        .effect-amount {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1b5e20;
+            margin: 0.5rem 0;
+        }
+
+        .total-effect {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            border-left: 4px solid #ff9800;
+            margin-top: 1rem;
+        }
+
+        .total-effect h4 {
+            color: #e65100;
+            font-size: 1.3rem;
+        }
+
+        .highlight {
+            color: #d84315;
+            font-size: 1.2em;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .kpi-card {
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid #9c27b0;
+        }
+
+        .kpi-card h4 {
+            color: #7b1fa2;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .kpi-card p {
+            margin: 0;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .goals-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .investment-breakdown {
+                grid-template-columns: 1fr;
+            }
+            
+            .effect-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .kpi-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AI 기반 생활습관의학 및 고령자 돌봄 통합 정책 제안</h1>
+            <h2>스마트 헬스케어 생태계를 통한 예방적 건강관리 및 돌봄 공백 해소</h2>
+        </header>
+
+        <section id="goals">
+            <h2>🎯 정책 목표</h2>
+            <div class="goals-grid">
+                <div class="goal-card">
+                    <h3>🏥 생활습관의학 기반 건강관리</h3>
+                    <p>AI 기반 만성질환 예방 및 조기 발견</p>
+                </div>
+                <div class="goal-card">
+                    <h3>👥 스마트 돌봄 시스템</h3>
+                    <p>AI 기술로 돌봄 공백 해소</p>
+                </div>
+                <div class="goal-card secondary">
+                    <h3>📱 디지털 활용 능력 향상</h3>
+                    <p>부차적 효과: 고령자 디지털 리터러시 증진</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="current-status">
+            <h2>📊 현황 분석</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>20.0%</h3>
+                    <p>2025년 고령자 비율<br><small>초고령사회 진입</small></p>
+                </div>
+                <div class="stat-card">
+                    <h3>73%</h3>
+                    <p>70세 이상 스마트폰 보급률<br><small>지속적 증가 추세</small></p>
+                </div>
+                <div class="stat-card">
+                    <h3>9.9%</h3>
+                    <p>의료비 GDP 대비<br><small>OECD 평균 초과</small></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="integration-plan">
+            <h2>🔗 서비스 통합 계획</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>기존 서비스</th>
+                        <th>현재 대상</th>
+                        <th>통합할 검증된 서비스</th>
+                        <th>기대 효과</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>응급안전안심서비스</strong></td>
+                        <td>30만명</td>
+                        <td>
+                            • 캐시워크 등 걷기 앱<br>
+                            • 삼성헬스, 구글핏 연동<br>
+                            • AI 건강 예측 알고리즘
+                        </td>
+                        <td>
+                            • 예방적 건강관리<br>
+                            • 응급상황 사전 감지<br>
+                            • 디지털 기기 친숙도 향상
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>노인맞춤돌봄서비스</strong></td>
+                        <td>50만명</td>
+                        <td>
+                            • 네이버 클로바케어<br>
+                            • 카카오 시니어 서비스<br>
+                            • AI 챗봇 (ChatGPT 등)
+                        </td>
+                        <td>
+                            • 24시간 돌봄 보조<br>
+                            • 사회적 고립 해소<br>
+                            • 디지털 소통 능력 향상
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>건강보험공단 앱</strong></td>
+                        <td>전국민</td>
+                        <td>
+                            • 넛지헬스케어 플랫폼<br>
+                            • 마이데이터 연계<br>
+                            • 지역화폐 연동 시스템
+                        </td>
+                        <td>
+                            • 건강 행동 변화 유도<br>
+                            • 만성질환 예방<br>
+                            • 디지털 금융 활용 증대
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="investment">
+            <h2>💰 투자 계획 및 경제적 효과</h2>
+            
+            <div class="investment-section">
+                <h3>📊 투자 계획 (3년간)</h3>
+                
+                <div class="investment-breakdown">
+                    <div class="investment-category">
+                        <h4>기존 예산 활용 (1조원)</h4>
+                        <ul>
+                            <li><strong>응급안전안심서비스 확대:</strong> 1,200억원<br>
+                                <small>현재 30만명 → 50만명 확대</small></li>
+                            <li><strong>노인맞춤돌봄서비스 고도화:</strong> 8,000억원<br>
+                                <small>AI 기반 서비스 질 향상</small></li>
+                            <li><strong>건강보험공단 디지털헬스 연계:</strong> 800억원<br>
+                                <small>기존 IT 인프라 확장</small></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="investment-category">
+                        <h4>추가 투자 필요 (4조원)</h4>
+                        <ul>
+                            <li><strong>AI 기반 통합 플랫폼 구축:</strong> 2,000억원</li>
+                            <li><strong>디지털 리터러시 교육:</strong> 500억원</li>
+                            <li><strong>지역 특화 서비스 인프라:</strong> 1,500억원</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="effect-section">
+                <h3>📈 예상 경제적 효과 (3년간 누적)</h3>
+                
+                <div class="effect-cards">
+                    <div class="effect-card">
+                        <h4>응급실 이용 최적화</h4>
+                        <div class="effect-amount">8,000억원</div>
+                        <p>65세 이상 부적절한 응급실 이용 감소<br>1차 의료기관 이용 활성화</p>
+                    </div>
+                    
+                    <div class="effect-card">
+                        <h4>만성질환 예방 효과</h4>
+                        <div class="effect-amount">2조 2,000억원</div>
+                        <p>생활습관의학 기반 예방으로<br>만성질환 발생률 감소</p>
+                    </div>
+                    
+                    <div class="effect-card">
+                        <h4>돌봄 서비스 효율화</h4>
+                        <div class="effect-amount">1조 5,000억원</div>
+                        <p>AI 맞춤형 돌봄으로<br>서비스 효율성 향상</p>
+                    </div>
+                </div>
+                
+                <div class="total-effect">
+                    <h4>총 예상 효과: <span class="highlight">4조 5,000억원</span></h4>
+                    <p>투자 대비 효과: 5조원 투자로 4조 5,000억원 효과 창출</p>
+                </div>
+            </div>
+
+            <div class="kpi-section">
+                <h3>🎯 핵심 성과 지표 (KPI)</h3>
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <h4>응급실 이용률</h4>
+                        <p>65세 이상 부적절 이용<br><strong>20% 감소</strong></p>
+                    </div>
+                    <div class="kpi-card">
+                        <h4>만성질환 조기 발견률</h4>
+                        <p><strong>30% 향상</strong></p>
+                    </div>
+                    <div class="kpi-card">
+                        <h4>돌봄 서비스 만족도</h4>
+                        <p><strong>80% 이상</strong> 달성</p>
+                    </div>
+                    <div class="kpi-card">
+                        <h4>디지털 서비스 이용률</h4>
+                        <p>70세 이상<br><strong>50% 달성</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
